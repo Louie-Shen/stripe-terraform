@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:15-alpine # 1. The software we want (Postgres v15, lightweight version)
+    container_name: stripe_paint_postgres # 2. A name to find it easily
+    environment:
+      POSTGRES_USER: user # 3. Auto-creates this user
+      POSTGRES_PASSWORD: password # 4. Auto-sets this password
+      POSTGRES_DB: paint_store # 5. Auto-creates this database
+    ports:
+      - "5432:5432" # 6. The Bridge: Map port 5432 inside the container to port 5432 on your Mac
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # 7. Persistence: Save data to a volume so it survives restarts
+
+volumes:
+  postgres_data:
